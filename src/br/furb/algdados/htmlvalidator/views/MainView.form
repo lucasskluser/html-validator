@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="br.furb.algdados.htmlvalidator.views.MainView">
+  <grid id="27dc6" binding="jPanel" layout-manager="GridLayoutManager" row-count="3" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="15" left="15" bottom="15" right="15"/>
+    <constraints>
+      <xy x="20" y="20" width="948" height="400"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <component id="3bd1c" class="javax.swing.JLabel" binding="labelFile">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font style="0"/>
+          <text value="Arquivo"/>
+        </properties>
+      </component>
+      <component id="4f79c" class="javax.swing.JTextField" binding="textFieldFile">
+        <constraints>
+          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <minimum-size width="250" height="30"/>
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties/>
+      </component>
+      <component id="e5951" class="javax.swing.JButton" binding="buttonAnalyseFile">
+        <constraints>
+          <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <minimum-size width="-1" height="30"/>
+          </grid>
+        </constraints>
+        <properties>
+          <font size="14" style="0"/>
+          <text value="Analisar"/>
+        </properties>
+      </component>
+      <scrollpane id="8be55" binding="jtableScrollPane" custom-create="true">
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="3" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <minimum-size width="450" height="100"/>
+            <preferred-size width="450" height="100"/>
+          </grid>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="5f8fd" class="javax.swing.JTable" binding="tableTagsFrequency" custom-create="true">
+            <constraints/>
+            <properties>
+              <autoCreateRowSorter value="false"/>
+              <enabled value="false"/>
+              <preferredScrollableViewportSize width="450" height="100"/>
+              <showVerticalLines value="false"/>
+              <updateSelectionOnSort value="true"/>
+            </properties>
+          </component>
+        </children>
+      </scrollpane>
+      <grid id="281b9" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="3" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <maximum-size width="450" height="100"/>
+          </grid>
+        </constraints>
+        <properties/>
+        <border type="etched">
+          <size top="1" left="1" bottom="1" right="1"/>
+          <color color="-4473925"/>
+        </border>
+        <children>
+          <component id="604d0" class="javax.swing.JTextArea" binding="textAreaResult">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                <minimum-size width="450" height="150"/>
+                <preferred-size width="450" height="150"/>
+              </grid>
+            </constraints>
+            <properties>
+              <editable value="false"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+    </children>
+  </grid>
+</form>
