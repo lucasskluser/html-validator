@@ -1,4 +1,4 @@
-package br.furb.algdados.htmlvalidator.utils.stack;
+package br.furb.algdados.htmlvalidator.utils.list;
 
 public class NoLista<T> {
     private T info;
@@ -18,5 +18,9 @@ public class NoLista<T> {
 
     public void setProximo(NoLista<T> proximo) {
         this.proximo = proximo;
+    }
+
+    public String toString() {
+        return getInfo().toString();
     }
 }

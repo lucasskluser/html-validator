@@ -1,4 +1,4 @@
-package br.furb.algdados.htmlvalidator.utils.stack;
+package br.furb.algdados.htmlvalidator.utils.list;
 
 public class ListaEncadeada<T> {
     private NoLista<T> primeiro;
@@ -14,6 +14,10 @@ public class ListaEncadeada<T> {
 
         primeiro = noLista;
         tamanho++;
+    }
+
+    public NoLista<T> getPrimeiro() {
+        return primeiro;
     }
 
     public boolean estaVazia() {
@@ -35,6 +39,11 @@ public class ListaEncadeada<T> {
     }
 
     public void retirar(T info) {
+        if(primeiro.getInfo().equals(info)){
+            primeiro = primeiro.getProximo();
+            return;
+        }
+
         NoLista<T> noLista = primeiro;
         NoLista<T> noAnterior = noLista;
 
