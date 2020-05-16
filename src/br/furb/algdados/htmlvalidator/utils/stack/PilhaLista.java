@@ -42,4 +42,9 @@ public class PilhaLista<T> implements Pilha<T> {
             pop();
         }
     }
+
+    @Override
+    public String toString() {
+        return lista.toString();
+    }
 }
