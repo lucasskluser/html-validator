@@ -56,6 +56,9 @@
               <showVerticalLines value="false"/>
               <updateSelectionOnSort value="true"/>
             </properties>
+            <clientProperties>
+              <html.disable class="java.lang.Boolean" value="true"/>
+            </clientProperties>
           </component>
         </children>
       </scrollpane>
