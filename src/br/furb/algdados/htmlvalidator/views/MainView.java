@@ -25,7 +25,6 @@ public class MainView {
     private HTMLController controller;
 
     public MainView(HTMLController controller) {
-        createUIComponents();
         createListeners();
         this.controller = controller;
     }
@@ -97,7 +96,6 @@ public class MainView {
 
         for (Map.Entry<String, Integer> entry : tagsMap.entrySet()) {
             tableModel.addRow(new Object[] { entry.getKey(), entry.getValue() });
-            System.out.println(String.format("TAG %s apareceu %d vezes", entry.getKey(), entry.getValue()));
         }
     }
 
