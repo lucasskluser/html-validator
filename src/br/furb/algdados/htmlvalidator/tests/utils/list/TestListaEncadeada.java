@@ -5,10 +5,8 @@ import br.furb.algdados.htmlvalidator.utils.list.NoLista;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 public class TestListaEncadeada {
     private ListaEncadeada<Integer> listaEncadeada;
@@ -38,7 +36,8 @@ public class TestListaEncadeada {
     public void deveIncluirNo() {
         listaEncadeada.inserir(5);
         NoLista<Integer> no = listaEncadeada.getPrimeiro();
-        assertEquals(no.getInfo(), 5);
+        int info = no.getInfo();
+        assertEquals(5, info);
         assertEquals(no.getProximo(), null);
     }
 
@@ -48,13 +47,16 @@ public class TestListaEncadeada {
         listaEncadeada.inserir(10);
         listaEncadeada.inserir(15);
 
-        assertEquals(15, listaEncadeada.getPrimeiro().getInfo());
+        int info = listaEncadeada.getPrimeiro().getInfo();
+        assertEquals(15, info);
         listaEncadeada.retirar(15);
 
-        assertEquals(10, listaEncadeada.getPrimeiro().getInfo());
+        info = listaEncadeada.getPrimeiro().getInfo();
+        assertEquals(10, info);
         listaEncadeada.retirar(listaEncadeada.getPrimeiro().getInfo());
 
-        assertEquals(5, listaEncadeada.getPrimeiro().getInfo());
+        info = listaEncadeada.getPrimeiro().getInfo();
+        assertEquals(5, info);
         listaEncadeada.retirar(listaEncadeada.getPrimeiro().getInfo());
 
         assertEquals(listaEncadeada.getPrimeiro(), null);
@@ -69,10 +71,18 @@ public class TestListaEncadeada {
 
          listaEncadeada.buscar(20);
 
-         assertEquals(20, listaEncadeada.buscar(20).getInfo());
-         assertEquals(15, listaEncadeada.buscar(15).getInfo());
-         assertEquals(10, listaEncadeada.buscar(10).getInfo());
-         assertEquals(5, listaEncadeada.buscar(5).getInfo());
+         int info = listaEncadeada.buscar(20).getInfo();
+         assertEquals(20, info);
+
+         info = listaEncadeada.buscar(15).getInfo();
+         assertEquals(15, info);
+
+         info = listaEncadeada.buscar(10).getInfo();
+         assertEquals(10, info);
+
+         info = listaEncadeada.buscar(5).getInfo();
+         assertEquals(5, info);
+
          assertEquals(null, listaEncadeada.buscar(50));
     }
 
@@ -86,13 +96,17 @@ public class TestListaEncadeada {
         listaEncadeada.retirar(20);
 
         NoLista<Integer> noLista = listaEncadeada.getPrimeiro();
-        assertEquals(15, noLista.getInfo());
+
+        int info = noLista.getInfo();
+        assertEquals(15, info);
 
         noLista = noLista.getProximo();
-        assertEquals(10, noLista.getInfo());
+        info = noLista.getInfo();
+        assertEquals(10, info);
 
+        info = noLista.getInfo();
         noLista = noLista.getProximo();
-        assertEquals(5, noLista.getInfo());
+        assertEquals(5, info);
     }
 
     @Test
@@ -105,13 +119,16 @@ public class TestListaEncadeada {
         listaEncadeada.retirar(15);
 
         NoLista<Integer> noLista = listaEncadeada.getPrimeiro();
-        assertEquals(20, noLista.getInfo());
+        int info = noLista.getInfo();
+        assertEquals(20, info);
 
         noLista = noLista.getProximo();
-        assertEquals(10, noLista.getInfo());
+        info = noLista.getInfo();
+        assertEquals(10, info);
 
         noLista = noLista.getProximo();
-        assertEquals(5, noLista.getInfo());
+        info = noLista.getInfo();
+        assertEquals(5, info);
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
@@ -121,8 +138,11 @@ public class TestListaEncadeada {
         listaEncadeada.inserir(15);
         listaEncadeada.inserir(20);
 
-        assertEquals(20, listaEncadeada.obterNo(0).getInfo());
-        assertEquals(5, listaEncadeada.obterNo(3).getInfo());
+        int info = listaEncadeada.obterNo(0).getInfo();
+        assertEquals(20, info);
+
+        info = listaEncadeada.obterNo(3).getInfo();
+        assertEquals(5, info);
 
         listaEncadeada.obterNo(10);
     }

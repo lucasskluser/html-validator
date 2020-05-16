@@ -1,11 +1,9 @@
 package br.furb.algdados.htmlvalidator.tests.utils.stack;
 
-import br.furb.algdados.htmlvalidator.utils.stack.Pilha;
 import br.furb.algdados.htmlvalidator.utils.stack.PilhaLista;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.AfterEach;
 
 import static org.junit.Assert.assertEquals;
 
