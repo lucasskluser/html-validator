@@ -9,7 +9,7 @@ public class Main {
         try {
             htmlController.view();
         } catch (Throwable e) {
-            htmlController.showError("Houve um erro durante a execuação do programa!");
+            htmlController.showError("Houve um erro durante a execução do programa!");
         }
     }
 }
