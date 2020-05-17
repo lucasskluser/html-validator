@@ -101,7 +101,8 @@ public class MainView {
         tableModel.setRowCount(0);
 
         for (Map.Entry<String, Integer> entry : tagsMap.entrySet()) {
-            tableModel.addRow(new Object[] { entry.getKey(), entry.getValue() });
+            Object key = entry.getKey().equals("<html>") ? "<html>&lt;html&gt;</html>" : entry.getKey();
+            tableModel.addRow(new Object[] { key, entry.getValue() });
         }
     }
 
