@@ -18,8 +18,11 @@ import java.util.regex.Pattern;
 
 public class HTMLValidatorService {
     private File file;
-    private static String openTagRegularExpression = "<[^\\/][^>]*>";
-    private static String closeTagRegularExpression = "<\\/[^>]*>";
+    private static String openTagRegularExpression = "<([^\\s\\/>][^!\\-\\-\\s>]*)";
+    private static String closeTagRegularExpression = "<\\/[^>]+|<[^>]+\\/>";
+    private static String[] singletonTags = {
+            "meta", "base", "br", "col", "command", "embed", "hr", "img", "input", "link", "param", "source", "!DOCTYPE"
+    };
 
     public HTMLValidatorService() {
     }
@@ -41,27 +44,41 @@ public class HTMLValidatorService {
 
         try {
             Scanner scanner = new Scanner(file);
-
+            int lineNumber = 0;
             while(scanner.hasNext()) {
+                lineNumber++;
                 String line = scanner.nextLine();
                 Matcher matcherOpenTag = patternOpenTag.matcher(line);
                 Matcher matcherCloseTag = patternCloseTag.matcher(line);
 
                 while (matcherOpenTag.find()) {
-                    String tag = matcherOpenTag.group(0);
+                    String tag = String.format("%s>", matcherOpenTag.group(0));
 
-                    pilhaLista.push(tag);
+                    if (!isSingletonTag(tag) && tag.length() < 20) {
+                        pilhaLista.push(tag);
+                    }
 
-                    if(tagsMap.containsKey(tag)) {
-                        int value = tagsMap.get(tag);
-                        tagsMap.replace(tag, value++);
-                    } else {
-                        tagsMap.put(tag, 1);
+                    if (tag.length() < 20) {
+                        if(tagsMap.containsKey(tag)) {
+                            int value = tagsMap.get(tag);
+                            tagsMap.replace(tag, ++value);
+                        } else {
+                            tagsMap.put(tag, 1);
+                        }
                     }
                 }
 
                 while (matcherCloseTag.find()) {
-                    if(matcherCloseTag.group(0).replace("</", "<").equals(pilhaLista.peek())) {
+                    String tag = matcherCloseTag.group(0);
+                    tag = String.format(
+                        "%s>",
+                        tag
+                        .split("\\s")[0]
+                        .trim()
+                        .replace("</", "<")
+                    );
+
+                    if(tag.equals(pilhaLista.peek())) {
                         pilhaLista.pop();
                     }
                 }
@@ -76,5 +93,15 @@ public class HTMLValidatorService {
         }
 
         return tagsMap;
+    }
+
+    private boolean isSingletonTag(String tag) {
+        for(String singletonTag : singletonTags) {
+            if (tag.equals(String.format("<%s>", singletonTag))) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
