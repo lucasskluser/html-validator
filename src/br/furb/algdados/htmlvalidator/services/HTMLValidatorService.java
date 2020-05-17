@@ -44,9 +44,8 @@ public class HTMLValidatorService {
 
         try {
             Scanner scanner = new Scanner(file);
-            int lineNumber = 0;
+
             while(scanner.hasNext()) {
-                lineNumber++;
                 String line = scanner.nextLine();
                 Matcher matcherOpenTag = patternOpenTag.matcher(line);
                 Matcher matcherCloseTag = patternCloseTag.matcher(line);
