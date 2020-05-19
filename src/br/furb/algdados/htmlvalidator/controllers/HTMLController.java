@@ -28,6 +28,7 @@ public class HTMLController {
         mainView = new MainView(this);
         htmlValidatorService = new HTMLValidatorService();
         htmlReaderService = new HTMLReaderService();
+        openedFile = new String();
     }
 
     public void view() {
