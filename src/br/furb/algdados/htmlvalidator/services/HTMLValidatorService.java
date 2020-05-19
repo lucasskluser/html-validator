@@ -40,6 +40,7 @@ public class HTMLValidatorService {
         Pattern patternOpenTag = Pattern.compile(openTagRegularExpression);
         Pattern patternCloseTag = Pattern.compile(closeTagRegularExpression);
         PilhaLista<String> pilhaLista = new PilhaLista();
+        // TODO: MIGRAR DE HASHMAP PARA LISTA ENCADEADA
         HashMap<String, Integer> tagsMap = new HashMap<>();
 
         try {
@@ -54,6 +55,7 @@ public class HTMLValidatorService {
                     String tag = String.format("%s>", matcherOpenTag.group(0));
 
                     if (!isSingletonTag(tag) && tag.length() < 20) {
+                        // TODO: IGNORAR TAG DE COMENTÁRIO (ignoredTags = {"!"})
                         pilhaLista.push(tag);
                     }
 
