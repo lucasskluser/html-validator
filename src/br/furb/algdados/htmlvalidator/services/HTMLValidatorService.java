@@ -7,7 +7,10 @@
 package br.furb.algdados.htmlvalidator.services;
 
 import br.furb.algdados.htmlvalidator.exceptions.HTMLBadFormattingException;
+import br.furb.algdados.htmlvalidator.utils.list.ListaEncadeada;
+import br.furb.algdados.htmlvalidator.utils.list.NoLista;
 import br.furb.algdados.htmlvalidator.utils.stack.PilhaLista;
+import br.furb.algdados.htmlvalidator.utils.tagfrequency.TagFrequency;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -31,17 +34,16 @@ public class HTMLValidatorService {
         this.file = file;
     }
 
-    public HashMap<String, Integer> validate(File file) throws HTMLBadFormattingException {
+    public ListaEncadeada<TagFrequency> validate(File file) throws HTMLBadFormattingException {
         this.file = file;
         return validate();
     }
 
-    public HashMap<String, Integer> validate() throws HTMLBadFormattingException {
+    public ListaEncadeada<TagFrequency> validate() throws HTMLBadFormattingException {
         Pattern patternOpenTag = Pattern.compile(openTagRegularExpression);
         Pattern patternCloseTag = Pattern.compile(closeTagRegularExpression);
         PilhaLista<String> pilhaLista = new PilhaLista();
-        // TODO: MIGRAR DE HASHMAP PARA LISTA ENCADEADA
-        HashMap<String, Integer> tagsMap = new HashMap<>();
+        ListaEncadeada<TagFrequency> tagsMap = new ListaEncadeada<>();
 
         try {
             Scanner scanner = new Scanner(file);
@@ -60,11 +62,13 @@ public class HTMLValidatorService {
                     }
 
                     if (tag.length() < 20) {
-                        if(tagsMap.containsKey(tag)) {
-                            int value = tagsMap.get(tag);
-                            tagsMap.replace(tag, ++value);
+                        TagFrequency tagFrequency = new TagFrequency(tag);
+                        if(tagsMap.buscar(tagFrequency) != null) {
+                            NoLista<TagFrequency> noLista = tagsMap.buscar(tagFrequency);
+                            noLista.getInfo().count();
                         } else {
-                            tagsMap.put(tag, 1);
+                            tagFrequency.count();
+                            tagsMap.inserir(tagFrequency);
                         }
                     }
                 }

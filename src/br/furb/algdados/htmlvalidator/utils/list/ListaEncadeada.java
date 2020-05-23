@@ -34,7 +34,7 @@ public class ListaEncadeada<T> {
         NoLista<T> noLista = primeiro;
 
         while (noLista != null) {
-            if (noLista.getInfo() == info) {
+            if (noLista.getInfo().equals(info)) {
                 return noLista;
             }
 

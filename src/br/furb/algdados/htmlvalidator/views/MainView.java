@@ -7,6 +7,9 @@
 package br.furb.algdados.htmlvalidator.views;
 
 import br.furb.algdados.htmlvalidator.controllers.HTMLController;
+import br.furb.algdados.htmlvalidator.utils.list.ListaEncadeada;
+import br.furb.algdados.htmlvalidator.utils.list.NoLista;
+import br.furb.algdados.htmlvalidator.utils.tagfrequency.TagFrequency;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -70,7 +73,7 @@ public class MainView {
      * @param absolutePath Caminho absoluto do arquivo validado
      * @param tagsMap Mapa de tags com suas frequências
      */
-    public void loadResult(String absolutePath, HashMap<String, Integer> tagsMap) {
+    public void loadResult(String absolutePath, ListaEncadeada<TagFrequency> tagsMap) {
         loadResult(absolutePath, tagsMap, null);
     }
 
@@ -81,7 +84,7 @@ public class MainView {
      * @param tagsMap Mapa de tags com suas frequências
      * @param validationError Erro da validação
      */
-    public void loadResult(String absolutePath, HashMap<String, Integer> tagsMap, String validationError) {
+    public void loadResult(String absolutePath, ListaEncadeada<TagFrequency> tagsMap, String validationError) {
         textFieldFile.setText(absolutePath);
 
         if (validationError != null) {
@@ -97,12 +100,15 @@ public class MainView {
      * Preenche a tabela de tags com suas frequências
      * @param tagsMap Mapa de tags com suas frequências
      */
-    private void loadTagsInTable(HashMap<String, Integer> tagsMap) {
+    private void loadTagsInTable(ListaEncadeada<TagFrequency> tagsMap) {
         tableModel.setRowCount(0);
+        NoLista<TagFrequency> noLista = tagsMap.getPrimeiro();
 
-        for (Map.Entry<String, Integer> entry : tagsMap.entrySet()) {
-            Object key = entry.getKey().equals("<html>") ? "<html>&lt;html&gt;</html>" : entry.getKey();
-            tableModel.addRow(new Object[] { key, entry.getValue() });
+        while (noLista != null) {
+            Object key = noLista.getInfo().getTag().equals("<html>") ? "<html>&lt;html&gt;</html>" : noLista.getInfo().getTag();
+            tableModel.addRow(new Object[] { key, noLista.getInfo().getFrequency() });
+
+            noLista = noLista.getProximo();
         }
     }
 

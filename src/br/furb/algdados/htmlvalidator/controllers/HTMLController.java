@@ -10,6 +10,8 @@ import br.furb.algdados.htmlvalidator.exceptions.HTMLBadFormattingException;
 import br.furb.algdados.htmlvalidator.exceptions.NotHTMLFileException;
 import br.furb.algdados.htmlvalidator.services.HTMLReaderService;
 import br.furb.algdados.htmlvalidator.services.HTMLValidatorService;
+import br.furb.algdados.htmlvalidator.utils.list.ListaEncadeada;
+import br.furb.algdados.htmlvalidator.utils.tagfrequency.TagFrequency;
 import br.furb.algdados.htmlvalidator.views.MainView;
 
 import javax.swing.*;
@@ -74,7 +76,7 @@ public class HTMLController {
 
     public void validateFile(File file) {
         try {
-            HashMap<String, Integer> tagsMap = htmlValidatorService.validate(file);
+            ListaEncadeada<TagFrequency> tagsMap = htmlValidatorService.validate(file);
             mainView.loadResult(openedFile, tagsMap);
         } catch (HTMLBadFormattingException e) {
             mainView.loadResult(openedFile, e.getTagsMap(), e.getMessage());
