@@ -103,6 +103,14 @@ public class MainView {
     private void loadTagsInTable(ListaEncadeada<TagFrequency> tagsMap) {
         tableModel.setRowCount(0);
         NoLista<TagFrequency> noLista = tagsMap.getPrimeiro();
+        ListaEncadeada<TagFrequency> listaInversa = new ListaEncadeada<>();
+
+        while (noLista != null) {
+            listaInversa.inserir(noLista.getInfo());
+            noLista = noLista.getProximo();
+        }
+
+        noLista = listaInversa.getPrimeiro();
 
         while (noLista != null) {
             Object key = noLista.getInfo().getTag().equals("<html>") ? "<html>&lt;html&gt;</html>" : noLista.getInfo().getTag();
