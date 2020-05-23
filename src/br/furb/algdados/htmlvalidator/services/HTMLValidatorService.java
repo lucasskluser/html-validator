@@ -26,6 +26,9 @@ public class HTMLValidatorService {
     private static String[] singletonTags = {
             "meta", "base", "br", "col", "command", "embed", "hr", "img", "input", "link", "param", "source", "!DOCTYPE"
     };
+    private static String[] ignoredTags = {
+            "!"
+    };
 
     public HTMLValidatorService() {
     }
@@ -56,13 +59,13 @@ public class HTMLValidatorService {
                 while (matcherOpenTag.find()) {
                     String tag = String.format("%s>", matcherOpenTag.group(0));
 
-                    if (!isSingletonTag(tag) && tag.length() < 20) {
-                        // TODO: IGNORAR TAG DE COMENTÁRIO (ignoredTags = {"!"})
+                    if ((!isSingletonTag(tag) && !isIgnoredTag(tag)) && tag.length() < 20) {
                         pilhaLista.push(tag);
                     }
 
-                    if (tag.length() < 20) {
+                    if (tag.length() < 20 && !isIgnoredTag(tag)) {
                         TagFrequency tagFrequency = new TagFrequency(tag);
+
                         if(tagsMap.buscar(tagFrequency) != null) {
                             NoLista<TagFrequency> noLista = tagsMap.buscar(tagFrequency);
                             noLista.getInfo().count();
@@ -103,6 +106,16 @@ public class HTMLValidatorService {
     private boolean isSingletonTag(String tag) {
         for(String singletonTag : singletonTags) {
             if (tag.equals(String.format("<%s>", singletonTag))) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private boolean isIgnoredTag(String tag) {
+        for (String ignoredTag : ignoredTags) {
+            if (tag.equals(String.format("<%s>", ignoredTag))) {
                 return true;
             }
         }
